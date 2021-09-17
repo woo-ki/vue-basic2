@@ -1,15 +1,11 @@
 <template>
-    <Blog/>
+    <router-view></router-view>
 </template>
 
 <script>
-import Blog from "@/components/blog/Blog";
-
 export default {
     name: 'App',
-    components: {
-        Blog
-    }
+    components: {}
 }
 </script>
 
