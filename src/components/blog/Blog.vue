@@ -23,7 +23,7 @@
 
     <router-view name="Home" :main_content="main_content"></router-view>
     <router-view name="List" v-for="(content, i) in contents" :key="i" :content="content"></router-view>
-    <router-view name="Detail"></router-view>
+    <router-view name="Detail" :content="contents[$route.params.idx]"></router-view>
 </template>
 
 <script>

@@ -27,7 +27,7 @@ const routes = [
                 }
             },
             {
-                path: 'detail',
+                path: 'detail/:idx',
                 components: {
                     Detail
                 }
