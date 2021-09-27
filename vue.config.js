@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '/vue_blog'
+    publicPath: '/vue_studyd'
 }

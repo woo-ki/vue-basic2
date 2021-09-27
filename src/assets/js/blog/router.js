@@ -9,11 +9,11 @@ import Comment from "@/components/blog/Comment";
 
 const routes = [
     {
-        path: '/',
+        path: '/vue_study',
         component: Index
     },
     {
-        path: "/blog",
+        path: "/vue_study/blog",
         component: Blog,
         children: [
             {
