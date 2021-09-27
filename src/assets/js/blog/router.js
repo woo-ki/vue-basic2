@@ -4,6 +4,8 @@ import List from "@/components/blog/List";
 import Index from "@/components/Index"
 import Home from "@/components/blog/Home";
 import Detail from "@/components/blog/Detail";
+import Author from "@/components/blog/Author";
+import Comment from "@/components/blog/Comment";
 
 const routes = [
     {
@@ -30,7 +32,17 @@ const routes = [
                 path: 'detail/:idx',
                 components: {
                     Detail
-                }
+                },
+                children: [
+                    {
+                        path: 'author',
+                        component: Author
+                    },
+                    {
+                        path: 'comment',
+                        component: Comment
+                    }
+                ]
             }
         ]
     },
