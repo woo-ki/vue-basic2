@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router";
+import {createRouter, createWebHashHistory} from "vue-router";
 import Blog from "@/components/blog/Blog";
 import List from "@/components/blog/List";
 import Index from "@/components/Index"
@@ -9,11 +9,11 @@ import Comment from "@/components/blog/Comment";
 
 const routes = [
     {
-        path: '/vue_study',
+        path: '/',
         component: Index
     },
     {
-        path: "/vue_study/blog",
+        path: "/blog",
         component: Blog,
         children: [
             {
@@ -49,7 +49,7 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory('/vue-study/'),
     routes,
 });
 

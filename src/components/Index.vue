@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li>
-            <router-link to="/vue_study/blog" class="page-move-btn">
+            <router-link to="/blog" class="page-move-btn">
                 <span>blog</span>
             </router-link>
         </li>
