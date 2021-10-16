@@ -6,7 +6,9 @@
         <ul class="header-button-right">
             <li>Next</li>
         </ul>
-        <img src="@/assets/images/logo.png" class="logo"/>
+        <router-link to="/">
+            <img src="@/assets/images/logo.png" class="logo"/>
+        </router-link>
     </div>
 
     <Container :posts="posts"/>
