@@ -6,11 +6,16 @@ import Home from "@/components/blog/Home";
 import Detail from "@/components/blog/Detail";
 import Author from "@/components/blog/Author";
 import Comment from "@/components/blog/Comment";
+import Insta from "@/components/insta/Insta";
 
 const routes = [
     {
         path: '/',
         component: Index
+    },
+    {
+        path: '/insta',
+        component: Insta
     },
     {
         path: "/blog",

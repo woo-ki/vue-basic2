@@ -5,6 +5,11 @@
                 <span>blog</span>
             </router-link>
         </li>
+        <li>
+            <router-link to="/insta" class="page-move-btn">
+                <span>insta</span>
+            </router-link>
+        </li>
     </ul>
 </template>
 
