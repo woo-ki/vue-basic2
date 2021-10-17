@@ -12,6 +12,7 @@
     </div>
 
     <Container :posts="posts"/>
+    <button @click="more(moreCnt)">더보기</button>
 
     <div class="footer">
         <ul class="footer-button-plus">
@@ -24,13 +25,32 @@
 <script>
 import Container from "@/components/insta/Container";
 import posts from "@/assets/js/insta/insta";
+import axios from 'axios';
 
 export default {
     name: "Insta",
     components: {Container},
     data() {
         return {
-            posts
+            posts,
+            moreCnt: 0
+        }
+    },
+    methods: {
+        more(cnt) {
+            this.moreCnt++;
+            axios.get(`https://codingapple1.github.io/vue/more${cnt}.json`)
+                .then((data) => {
+                    if(data.status == 200) {
+                        this.posts.push(data.data);
+                    } else {
+                        console.log('fail');
+                        this.moreCnt--;
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                    this.moreCnt--;
+                });
         }
     }
 }
