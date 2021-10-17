@@ -25,7 +25,6 @@
 <script>
 import Container from "@/components/insta/Container";
 import posts from "@/assets/js/insta/insta";
-import axios from 'axios';
 
 export default {
     name: "Insta",
@@ -39,7 +38,7 @@ export default {
     methods: {
         more(cnt) {
             this.moreCnt++;
-            axios.get(`https://codingapple1.github.io/vue/more${cnt}.json`)
+            this.axios.get(`https://codingapple1.github.io/vue/more${cnt}.json`)
                 .then((data) => {
                     if(data.status == 200) {
                         this.posts.push(data.data);
