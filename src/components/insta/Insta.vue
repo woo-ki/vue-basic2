@@ -11,12 +11,12 @@
         </router-link>
     </div>
 
-    <Container :posts="posts"/>
-    <button @click="more(moreCnt)">더보기</button>
+    <Container :posts="posts" :containerData="containerData"/>
+<!--    <button @click="more(moreCnt)">더보기</button>-->
 
     <div class="footer">
         <ul class="footer-button-plus">
-            <input type="file" id="file" class="inputfile"/>
+            <input @change="upload" type="file" id="file" class="inputfile"/>
             <label for="file" class="input-plus">+</label>
         </ul>
     </div>
@@ -32,13 +32,18 @@ export default {
     data() {
         return {
             posts,
-            moreCnt: 0
+            moreCnt: 0,
+            containerData: {
+                nowPage: 0,
+                url: ''
+            }
         }
     },
     methods: {
         more(cnt) {
             this.moreCnt++;
-            this.axios.get(`https://codingapple1.github.io/vue/more${cnt}.json`)
+            this.axios
+                .get(`https://codingapple1.github.io/vue/more${cnt}.json`)
                 .then((data) => {
                     if(data.status == 200) {
                         this.posts.push(data.data);
@@ -50,6 +55,14 @@ export default {
                     console.log(err);
                     this.moreCnt--;
                 });
+        },
+        upload(e) {
+            let file = e.target.files;
+            let url = URL.createObjectURL(file[0])
+            if(url != null && url != '') {
+                this.containerData.url = url;
+                this.containerData.nowPage++;
+            }
         }
     }
 }
