@@ -1,20 +1,21 @@
 <template>
     <div class="header">
         <ul class="header-button-left">
-            <li>Cancel</li>
+            <li @click="cancelWrite()">Cancel</li>
         </ul>
         <ul class="header-button-right">
-            <li>Next</li>
+            <li v-if="containerData.nowPage === 1" @click="containerData.nowPage++">Next</li>
+            <li v-if="containerData.nowPage === 2" @click="submit()">Submit</li>
         </ul>
         <router-link to="/">
             <img src="@/assets/images/logo.png" class="logo"/>
         </router-link>
     </div>
 
-    <Container :posts="posts" :containerData="containerData"/>
+    <Container @writeContent="newPostContent = $event" :posts="posts" :containerData="containerData"/>
 <!--    <button @click="more(moreCnt)">더보기</button>-->
 
-    <div class="footer">
+    <div v-if="containerData.nowPage === 0" class="footer">
         <ul class="footer-button-plus">
             <input @change="upload" type="file" id="file" class="inputfile"/>
             <label for="file" class="input-plus">+</label>
@@ -36,7 +37,8 @@ export default {
             containerData: {
                 nowPage: 0,
                 url: ''
-            }
+            },
+            newPostContent: ''
         }
     },
     methods: {
@@ -57,12 +59,36 @@ export default {
                 });
         },
         upload(e) {
+            if(this.containerData.nowPage > 1) {
+                return;
+            }
             let file = e.target.files;
             let url = URL.createObjectURL(file[0])
             if(url != null && url != '') {
                 this.containerData.url = url;
                 this.containerData.nowPage++;
             }
+        },
+        submit() {
+            const newPost = {
+                name: 'Kim Hyun',
+                userImage: 'https://placeimg.com/100/100/arch',
+                postImage: this.containerData.url,
+                likes: 0,
+                date: 'October 27',
+                liked: false,
+                content: this.newPostContent,
+                filter: 'perpetua'
+            };
+            this.posts.unshift(newPost);
+            this.containerData.nowPage = 0;
+            this.containerData.url = '';
+            document.querySelector('.inputfile').value = '';
+        },
+        cancelWrite() {
+            this.containerData.nowPage = 0;
+            this.containerData.url = '';
+            document.querySelector('.inputfile').value = '';
         }
     }
 }

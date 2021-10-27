@@ -20,7 +20,7 @@
         <div v-else-if="containerData.nowPage == 2">
             <div class="upload-image" :style="{backgroundImage: `url('${containerData.url}')`}"></div>
             <div class="write">
-                <textarea class="write-box">write!</textarea>
+                <textarea class="write-box" placeholder="write!" @input="$emit('writeContent', $event.target.value)"></textarea>
             </div>
         </div>
     </div>
