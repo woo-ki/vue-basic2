@@ -97,3 +97,4 @@ export default {
 <style scoped src="@/assets/css/insta/insta.css">
 /*@import '../../assets/css/insta/insta';*/
 </style>
+<style src="@/assets/css/insta/cssgram.min.css"></style>

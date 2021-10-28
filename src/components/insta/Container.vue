@@ -8,11 +8,17 @@
         <div v-else-if="containerData.nowPage == 1">
             <div class="upload-image" :style="{backgroundImage: `url('${containerData.url}')`}"></div>
             <div class="filters">
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
+                <FilterBox v-for="(filter, i) in filters" :key="i" :filter="filter" :containerData="containerData">
+                    <!-- 단일데이터인 경우 -->
+                    {{ filter }}
+                    <!-- 다중데이터인 경우 -->
+                    <!-- <template v-slot:a>
+                        <span>{{ filter }}</span>
+                    </template> -->
+
+                    <!-- 자식에서 데이터 받는법 -->
+                    <!-- <template v-slot:default="tempMsg">{{ tempMsg }}</template> -->
+                </FilterBox>
             </div>
         </div>
 
@@ -28,13 +34,24 @@
 
 <script>
 import Post from "@/components/insta/Post";
+import FilterBox from "@/components/insta/FilterBox";
 
 export default {
     name: "Container",
-    components: {Post},
+    components: {
+        Post,
+        FilterBox
+    },
     props: {
         posts: Array,
         containerData: Object
+    },
+    data() {
+        return {
+            filters: ["aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson",
+                "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua",
+                "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"]
+        }
     }
 }
 </script>
