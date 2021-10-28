@@ -6,7 +6,7 @@
 
         <!-- 필터선택페이지 -->
         <div v-else-if="containerData.nowPage == 1">
-            <div class="upload-image" :style="{backgroundImage: `url('${containerData.url}')`}"></div>
+            <div class="upload-image" :class="containerData.filter" :style="{backgroundImage: `url('${containerData.url}')`}"></div>
             <div class="filters">
                 <FilterBox v-for="(filter, i) in filters" :key="i" :filter="filter" :containerData="containerData">
                     <!-- 단일데이터인 경우 -->
@@ -24,7 +24,7 @@
 
         <!-- 글작성페이지 -->
         <div v-else-if="containerData.nowPage == 2">
-            <div class="upload-image" :style="{backgroundImage: `url('${containerData.url}')`}"></div>
+            <div class="upload-image" :class="containerData.filter" :style="{backgroundImage: `url('${containerData.url}')`}"></div>
             <div class="write">
                 <textarea class="write-box" placeholder="write!" @input="$emit('writeContent', $event.target.value)"></textarea>
             </div>

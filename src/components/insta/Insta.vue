@@ -36,7 +36,8 @@ export default {
             moreCnt: 0,
             containerData: {
                 nowPage: 0,
-                url: ''
+                url: '',
+                filter: ''
             },
             newPostContent: ''
         }
@@ -78,18 +79,27 @@ export default {
                 date: 'October 27',
                 liked: false,
                 content: this.newPostContent,
-                filter: 'perpetua'
+                filter: this.containerData.filter
             };
             this.posts.unshift(newPost);
             this.containerData.nowPage = 0;
             this.containerData.url = '';
+            this.containerData.filter = '';
             document.querySelector('.inputfile').value = '';
         },
         cancelWrite() {
             this.containerData.nowPage = 0;
             this.containerData.url = '';
+            this.containerData.filter = '';
             document.querySelector('.inputfile').value = '';
         }
+    },
+    mounted() {
+        // 에미터 이벤트 받는법 마운티드에 하는게 관습적
+        // this.emitter.on('이벤트명', () => {'실행문'});
+        this.emitter.on('sendFilterName', (v) => {
+            this.containerData.filter = v;
+        })
     }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="filter-item" :class="filter" :style="{backgroundImage: `url('${containerData.url}')`}">
+    <div class="filter-item" :class="filter" :style="{backgroundImage: `url('${containerData.url}')`}" @click="sendFilterName()">
         <!-- 단일데이터인 경우 -->
         <slot></slot>
         <!-- 다중데이터인 경우 -->
@@ -16,6 +16,13 @@ export default {
     props: {
         containerData: Object,
         filter: String
+    },
+    methods: {
+        sendFilterName() {
+            // 에미터로 이벤트 심어보내는 방법.
+            // this.emitter.emit('이벤트명', '데이터');
+            this.emitter.emit('sendFilterName', this.filter)
+        }
     },
     data() {
         return {
@@ -35,5 +42,7 @@ export default {
     color : white;
     background-size: cover;
     background-position : center;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
+    cursor: pointer;
 }
 </style>
