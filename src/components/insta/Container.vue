@@ -1,6 +1,8 @@
 <template>
     <div id="container">
-        <h4>ㅎㅇ {{ $store.state.name }}</h4>
+        <h4>ㅎㅇ 나는 {{ $store.state.name }} 나이는 {{ $store.state.age }}</h4>
+        <button @click="$store.commit('changeName', 'wooki')">이름바꾸기</button>
+        <button @click="$store.commit('increaseAge')">나이올리기</button>
         <div v-if="containerData.nowPage == 0">
             <Post v-for="(post, i) in posts" :key="i" :post="post"/>
         </div>

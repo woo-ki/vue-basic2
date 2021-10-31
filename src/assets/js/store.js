@@ -3,7 +3,16 @@ import {createStore} from "vuex";
 const store = createStore({
     state() {
         return {
-            name: 'kim'
+            name: 'kim',
+            age: 20
+        }
+    },
+    mutations: {
+        changeName(state, param) {
+            state.name = param;
+        },
+        increaseAge(state) {
+            state.age += 1;
         }
     }
 });
