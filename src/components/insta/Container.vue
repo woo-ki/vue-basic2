@@ -1,5 +1,6 @@
 <template>
     <div id="container">
+        <h4>ㅎㅇ {{ $store.state.name }}</h4>
         <div v-if="containerData.nowPage == 0">
             <Post v-for="(post, i) in posts" :key="i" :post="post"/>
         </div>

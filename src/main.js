@@ -3,6 +3,7 @@ import App from './App.vue'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import router from "@/assets/js/router";
+import store from '@/assets/js/store';
 import axios from 'axios';
 import mitt from 'mitt';
 
@@ -11,4 +12,6 @@ import mitt from 'mitt';
 const app = createApp(App);
 app.config.globalProperties.axios = axios;
 app.config.globalProperties.emitter = mitt();
-app.use(router).mount('#app');
+
+
+app.use(store).use(router).mount('#app');
