@@ -1,11 +1,11 @@
 <template>
     <div class="header">
         <ul class="header-button-left">
-            <li @click="cancelWrite()" v-if="containerData.nowPage >= 1">Cancel</li>
+            <li @click="clearWrite()" v-if="containerData.nowPage >= 1">Cancel</li>
         </ul>
         <ul class="header-button-right">
             <li v-if="containerData.nowPage === 1" @click="containerData.nowPage++">Next</li>
-            <li v-if="containerData.nowPage === 2" @click="submit($store.state.posts)">Submit</li>
+            <li v-if="containerData.nowPage === 2" @click="submit($store)">Submit</li>
         </ul>
         <router-link to="/">
             <img src="@/assets/images/logo.png" class="logo"/>
@@ -13,7 +13,7 @@
     </div>
 
     <Container @writeContent="newPostContent = $event" :containerData="containerData"/>
-    <button v-if="containerData.nowPage === 0" @click="more($store.state.posts)">더보기</button>
+    <button v-if="containerData.nowPage === 0" @click="$store.dispatch('getMorePost', $store.state.moreCnt)">더보기</button>
 
     <div v-if="containerData.nowPage === 0" class="footer">
         <ul class="footer-button-plus">
@@ -29,10 +29,11 @@ import Container from "@/components/insta/Container";
 
 export default {
     name: "Insta",
-    components: {Container},
+    components: {
+        Container
+    },
     data() {
         return {
-            moreCnt: 0,
             containerData: {
                 nowPage: 0,
                 url: '',
@@ -42,22 +43,6 @@ export default {
         }
     },
     methods: {
-        more(target) {
-            this.axios
-                .get(`https://codingapple1.github.io/vue/more${this.moreCnt}.json`)
-                .then((data) => {
-                    if(data.status == 200) {
-                        target.push(data.data);
-                    } else {
-                        console.log('fail');
-                        this.moreCnt--;
-                    }
-                }).catch((err) => {
-                    console.log(err);
-                    this.moreCnt--;
-                });
-            this.moreCnt++;
-        },
         upload(e) {
             if(this.containerData.nowPage > 1) {
                 return;
@@ -69,28 +54,24 @@ export default {
                 this.containerData.nowPage++;
             }
         },
-        submit(target) {
+        submit(s) {
             const newPost = {
-                name: 'Kim Hyun',
+                name: 'Wooki',
                 userImage: 'https://placeimg.com/100/100/arch',
                 postImage: this.containerData.url,
                 likes: 0,
-                date: 'October 27',
+                date: 'November 02',
                 liked: false,
                 content: this.newPostContent,
                 filter: this.containerData.filter
             };
-            target.unshift(newPost);
-            this.containerData.nowPage = 0;
-            this.containerData.url = '';
-            this.containerData.filter = '';
-            document.querySelector('.inputfile').value = '';
+            s.commit('addNewPost', newPost);
+            this.clearWrite();
         },
-        cancelWrite() {
+        clearWrite() {
             this.containerData.nowPage = 0;
             this.containerData.url = '';
             this.containerData.filter = '';
-            document.querySelector('.inputfile').value = '';
         }
     },
     mounted() {
