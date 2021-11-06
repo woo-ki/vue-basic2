@@ -1,7 +1,7 @@
 <template>
     <div id="container">
         <div v-if="containerData.nowPage == 0">
-            <Post v-for="(post, i) in $store.state.posts" :key="i" :post="post" :idx="i"/>
+            <Post v-for="(post, i) in this.$store.state.posts" :key="i" :post="post" :idx="i"/>
         </div>
 
         <!-- 필터선택페이지 -->
@@ -43,7 +43,6 @@ export default {
         FilterBox
     },
     props: {
-        posts: Array,
         containerData: Object
     },
     data() {

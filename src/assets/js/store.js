@@ -10,12 +10,6 @@ const store = createStore({
         }
     },
     mutations: {
-        changeName(state, param) {
-            state.name = param;
-        },
-        increaseAge(state) {
-            state.age += 1;
-        },
         likeAction(state, idx) {
             const target = state.posts[idx];
             target.liked ? target.likes-- : target.likes++;

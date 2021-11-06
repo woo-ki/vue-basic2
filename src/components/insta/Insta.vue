@@ -5,7 +5,7 @@
         </ul>
         <ul class="header-button-right">
             <li v-if="containerData.nowPage === 1" @click="containerData.nowPage++">Next</li>
-            <li v-if="containerData.nowPage === 2" @click="submit($store)">Submit</li>
+            <li v-if="containerData.nowPage === 2" @click="submit()">Submit</li>
         </ul>
         <router-link to="/">
             <img src="@/assets/images/logo.png" class="logo"/>
@@ -13,7 +13,7 @@
     </div>
 
     <Container @writeContent="newPostContent = $event" :containerData="containerData"/>
-    <button v-if="containerData.nowPage === 0" @click="$store.dispatch('getMorePost', $store.state.moreCnt)">더보기</button>
+    <button v-if="containerData.nowPage === 0" @click="this.$store.dispatch('getMorePost', moreCnt)">더보기</button>
 
     <div v-if="containerData.nowPage === 0" class="footer">
         <ul class="footer-button-plus">
@@ -26,6 +26,7 @@
 
 <script>
 import Container from "@/components/insta/Container";
+import {mapMutations, mapState} from 'vuex';
 
 export default {
     name: "Insta",
@@ -42,11 +43,20 @@ export default {
             newPostContent: ''
         }
     },
+    computed: {
+        // posts() {
+        //     return this.$store.state.posts
+        // }
+        // ...mapState(['moreCnt', 'posts'])
+        ...mapState({moreCnt: 'moreCnt', posts: 'posts'})
+    },
     methods: {
+        ...mapMutations(['addNewPost']),
         upload(e) {
             if(this.containerData.nowPage > 1) {
                 return;
             }
+
             let file = e.target.files;
             let url = URL.createObjectURL(file[0])
             if(url != null && url != '') {
@@ -54,7 +64,7 @@ export default {
                 this.containerData.nowPage++;
             }
         },
-        submit(s) {
+        submit() {
             const newPost = {
                 name: 'Wooki',
                 userImage: 'https://placeimg.com/100/100/arch',
@@ -65,7 +75,7 @@ export default {
                 content: this.newPostContent,
                 filter: this.containerData.filter
             };
-            s.commit('addNewPost', newPost);
+            this.addNewPost(newPost);
             this.clearWrite();
         },
         clearWrite() {

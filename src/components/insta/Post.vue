@@ -4,7 +4,7 @@
             <div class="profile" :style="profileImage"></div>
             <span class="profile-name">{{ post.name }}</span>
         </div>
-        <div class="post-body" @click="$store.commit('likeAction', idx)" :class="post.filter" :style="{backgroundImage: `url(${post.postImage})`}"></div>
+        <div class="post-body" @click="likeAction(idx)" :class="post.filter" :style="{backgroundImage: `url(${post.postImage})`}"></div>
         <div class="post-content">
             <p>{{ post.likes }} Likes</p>
             <p><strong>{{ post.name }}</strong> {{ post.content }}</p>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex';
 export default {
     name: "Post",
     props: {
@@ -27,6 +28,9 @@ export default {
             }
         }
     },
+    methods: {
+        ...mapMutations(['likeAction'])
+    }
 }
 </script>
 
