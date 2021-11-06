@@ -6,6 +6,7 @@ import router from "@/assets/js/router";
 import store from '@/assets/js/store';
 import axios from 'axios';
 import mitt from 'mitt';
+import './registerServiceWorker'
 
 // createApp(App).use(router).mount('#app')
 
