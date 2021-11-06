@@ -36,7 +36,7 @@ export default {
     data() {
         return {
             containerData: {
-                nowPage: 0,
+                nowPage: 3,
                 url: '',
                 filter: ''
             },

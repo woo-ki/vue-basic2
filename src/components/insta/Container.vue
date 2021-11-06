@@ -29,16 +29,22 @@
                 <textarea class="write-box" placeholder="write!" @input="$emit('writeContent', $event.target.value)"></textarea>
             </div>
         </div>
+
+        <div v-else-if="containerData.nowPage == 3">
+            <MyPage :one="1"/>
+        </div>
     </div>
 </template>
 
 <script>
 import Post from "@/components/insta/Post";
 import FilterBox from "@/components/insta/FilterBox";
+import MyPage from "@/components/insta/MyPage";
 
 export default {
     name: "Container",
     components: {
+        MyPage,
         Post,
         FilterBox
     },
